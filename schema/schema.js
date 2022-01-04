@@ -10,6 +10,13 @@ const movies = [
   { name: "Interstellar", genre: "Sci-Fi", id: "4" },
 ];
 
+const directors = [
+  { name: "Todd Phillips", age: 60, id: "1" },
+  { name: "Wes Anderson", age: 52, id: "2" },
+  { name: "David Chazelle", age: 58, id: "3" },
+  { name: "Christopher Nolan", age: 51, id: "4" },
+];
+
 const MovieType = new GraphQLObjectType({
   name: "Movie",
   fields: () => ({
