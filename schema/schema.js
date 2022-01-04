@@ -10,10 +10,10 @@ const {
 } = graphql;
 
 const movies = [
-  { name: "Joker", genre: "Drama", id: "1" },
-  { name: "Moonrise Kingdom", genre: "Romance", id: "2" },
-  { name: "La La Land", genre: "Musical", id: "3" },
-  { name: "Interstellar", genre: "Sci-Fi", id: "4" },
+  { name: "Joker", genre: "Drama", id: "1", directorId: "1" },
+  { name: "Moonrise Kingdom", genre: "Romance", id: "2", directorId: "2" },
+  { name: "La La Land", genre: "Musical", id: "3", directorId: "3" },
+  { name: "Interstellar", genre: "Sci-Fi", id: "4", directorId: "4" },
 ];
 
 const directors = [
@@ -29,6 +29,13 @@ const MovieType = new GraphQLObjectType({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
+    director: {
+      type: DirectorType,
+      resolve(parent, args) {
+        console.log(parent);
+        return _.find(directors, { id: parent.directorId });
+      },
+    },
   }),
 });
 
