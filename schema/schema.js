@@ -1,5 +1,7 @@
 const graphql = require("graphql");
 const _ = require("lodash");
+const Movie = require("../models/movie");
+const Director = require("../models/director");
 
 const {
   GraphQLObjectType,
@@ -20,7 +22,7 @@ const MovieType = new GraphQLObjectType({
       type: DirectorType,
       resolve(parent, args) {
         console.log(parent);
-        return _.find(directors, { id: parent.directorId });
+        // return _.find(directors, { id: parent.directorId });
       },
     },
   }),
@@ -35,7 +37,7 @@ const DirectorType = new GraphQLObjectType({
     movies: {
       type: new GraphQLList(MovieType),
       resolve(parent, args) {
-        return _.filter(movies, { directorId: parent.id });
+        // return _.filter(movies, { directorId: parent.id });
       },
     },
   }),
@@ -48,14 +50,14 @@ const RootQuery = new GraphQLObjectType({
       type: MovieType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return _.find(movies, { id: args.id });
+        // return _.find(movies, { id: args.id });
       },
     },
     director: {
       type: DirectorType,
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
-        return _.find(directors, { id: args.id });
+        // return _.find(directors, { id: args.id });
       },
     },
     movies: {
@@ -71,6 +73,26 @@ const RootQuery = new GraphQLObjectType({
       },
     },
   }),
+});
+
+const Mutations = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    addDirector: {
+      type: DirectorType,
+      args: {
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        let director = new Director({
+          name: args.name,
+          age: args.age,
+        });
+        director.save();
+      },
+    },
+  },
 });
 
 module.exports = new GraphQLSchema({
