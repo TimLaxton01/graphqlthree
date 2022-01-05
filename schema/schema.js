@@ -75,7 +75,7 @@ const RootQuery = new GraphQLObjectType({
   }),
 });
 
-const Mutations = new GraphQLObjectType({
+const Mutation = new GraphQLObjectType({
   name: "Mutation",
   fields: {
     addDirector: {
@@ -89,7 +89,7 @@ const Mutations = new GraphQLObjectType({
           name: args.name,
           age: args.age,
         });
-        director.save();
+        return director.save();
       },
     },
   },
@@ -97,4 +97,5 @@ const Mutations = new GraphQLObjectType({
 
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
