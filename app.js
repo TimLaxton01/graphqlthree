@@ -3,26 +3,33 @@ const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
 const mongoose = require("mongoose");
 const { once } = require("lodash");
+const dotenv = require("dotenv");
 require("dotenv").config();
+
+dotenv.config();
 
 const app = express();
 
-// const database = process.env.CONNECTION_URI || 8000;
-// mongoose.connect(database);
-// mongoose.connection.once("open", () => {
-//   console.log("Connected");
-// });
+const database =
+  "mongodb+srv://TimLaxton:123abc@movie.etjd2.mongodb.net/MovieQL?retryWrites=true&w=majority" ||
+  8000;
+mongoose.connect(database);
+mongoose.connection.once("open", () => {
+  console.log("Connected");
+});
 
-mongoose
-  .connect(
-    "mongodb+srv://TimLaxton:123abc@movie.etjd2.mongodb.net/MovieQL?retryWrites=true&w=majority"
-  )
-  .then((connection) => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
+// mongoose
+//   .connect(`${process.env.CONNECTION_URL}`, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true,
+//   })
+//   .then((connection) => {
+//     console.log("Connected to MongoDB");
+//   })
+//   .catch((error) => {
+//     console.log(error.message);
+//   });
 
 app.use(
   "/graphql",
