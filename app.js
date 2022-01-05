@@ -5,10 +5,13 @@ const mongoose = require("mongoose");
 const { once } = require("lodash");
 const dotenv = require("dotenv");
 require("dotenv").config();
+const cors = require("cors");
 
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 
 const database =
   "mongodb+srv://TimLaxton:123abc@movie.etjd2.mongodb.net/MovieQL?retryWrites=true&w=majority" ||
