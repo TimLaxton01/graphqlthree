@@ -10,40 +10,6 @@ const {
   GraphQLList,
 } = graphql;
 
-const movies = [
-  { name: "Joker", genre: "Drama", id: "1", directorId: "1" },
-  { name: "Moonrise Kingdom", genre: "Romance", id: "2", directorId: "2" },
-  { name: "La La Land", genre: "Musical", id: "3", directorId: "3" },
-  { name: "Interstellar", genre: "Sci-Fi", id: "4", directorId: "4" },
-  {
-    name: "The Grand Budapest Hotel",
-    genre: "Sci-Fi",
-    id: "5",
-    directorId: "5",
-  },
-  {
-    name: "Whiplash",
-    genre: "Sci-Fi",
-    id: "6",
-    directorId: "4",
-    directorId: "3",
-  },
-  {
-    name: "First Man",
-    genre: "Sci-Fi",
-    id: "7",
-    directorId: "4",
-    directorId: "3",
-  },
-];
-
-const directors = [
-  { name: "Todd Phillips", age: 60, id: "1" },
-  { name: "Wes Anderson", age: 52, id: "2" },
-  { name: "David Chazelle", age: 58, id: "3" },
-  { name: "Christopher Nolan", age: 51, id: "4" },
-];
-
 const MovieType = new GraphQLObjectType({
   name: "Movie",
   fields: () => ({
